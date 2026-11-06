@@ -1,0 +1,6 @@
+{
+  "name": "SEC Dissolution Word Doc Generator",
+  "description": "Automated generator for Philippine SEC corporate dissolution documents in Microsoft Word (.docx) format with dedicated signatory pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
