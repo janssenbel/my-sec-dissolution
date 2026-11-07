@@ -483,8 +483,54 @@ function renderDirectorsCertPages(data: DissolutionFormData, fontStyle: React.CS
           <p>___________________________ ) S.S.</p>
         </div>
 
-        <p className="text-justify indent-10 mb-6">
-          BEFORE ME, a Notary Public for and in the above jurisdiction, this ___ day of _________, {data.executionMonthYear || '2026'}, personally appeared the above-named persons, known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me that the same is their free and voluntary act and deed as well as of the corporation they represent.
+        <p className="text-justify indent-10 mb-5">
+          BEFORE ME, a Notary Public for and in the above jurisdiction, this ___ day of _________, {data.executionMonthYear || '2026'}, personally appeared the following persons with their respective Competent Evidence of Identity:
+        </p>
+
+        {/* Competent Evidence Table */}
+        <div className="border border-slate-300 rounded overflow-hidden mb-6">
+          <table className="w-full text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr className="bg-slate-100 border-b border-slate-300">
+                <th className="border-r border-slate-300 p-2 text-left font-bold">Name</th>
+                <th className="border-r border-slate-300 p-2 text-center font-bold">
+                  Competent Evidence of Identity (TIN)
+                </th>
+                <th className="p-2 text-center font-bold">Date / Place Issued</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(() => {
+                const rows: { name: string; tin: string }[] = [];
+                const seen = new Set<string>();
+                for (const s of data.stockholders) {
+                  const norm = (s.name || '').trim().toLowerCase().replace(/\s+/g, ' ');
+                  if (norm && !seen.has(norm)) {
+                    seen.add(norm);
+                    rows.push({ name: s.name, tin: s.tin });
+                  }
+                }
+                if (data.corporateSecretaryName) {
+                  const normSec = data.corporateSecretaryName.trim().toLowerCase().replace(/\s+/g, ' ');
+                  if (normSec && !seen.has(normSec)) {
+                    seen.add(normSec);
+                    rows.push({ name: data.corporateSecretaryName, tin: data.corporateSecretaryTin });
+                  }
+                }
+                return rows.map((person, idx) => (
+                  <tr key={idx} className="border-b border-slate-300 last:border-none">
+                    <td className="border-r border-slate-300 p-2 font-medium">{person.name}</td>
+                    <td className="border-r border-slate-300 p-2 text-center">TIN: {person.tin}</td>
+                    <td className="p-2 text-center"></td>
+                  </tr>
+                ));
+              })()}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-justify mb-6">
+          known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me that the same is their free and voluntary act and deed as well as of the corporation they represent.
         </p>
 
         <p className="text-justify mb-8">

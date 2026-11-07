@@ -644,9 +644,96 @@ export function generateDirectorsCertDoc(data: DissolutionFormData): Document {
           }),
 
           createBodyPara(
-            `BEFORE ME, a Notary Public for and in the above jurisdiction, this ___ day of _________, ${data.executionMonthYear || '2026'}, personally appeared the above-named persons, known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me that the same is their free and voluntary act and deed as well as of the corporation they represent.`,
+            `BEFORE ME, a Notary Public for and in the above jurisdiction, this ___ day of _________, ${data.executionMonthYear || '2026'}, personally appeared the following persons with their respective Competent Evidence of Identity:`,
             font,
             true,
+            180
+          ),
+
+          // Competent Evidence of Identity Table (using TIN)
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 45, type: WidthType.PERCENTAGE },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [new TextRun({ text: 'Name', bold: true, font, size: 22 })],
+                      }),
+                    ],
+                  }),
+                  new TableCell({
+                    width: { size: 30, type: WidthType.PERCENTAGE },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [
+                          new TextRun({
+                            text: 'Competent Evidence of Identity (TIN)',
+                            bold: true,
+                            font,
+                            size: 22,
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  new TableCell({
+                    width: { size: 25, type: WidthType.PERCENTAGE },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        children: [new TextRun({ text: 'Date / Place Issued', bold: true, font, size: 22 })],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              ...getDirectorsCompetentEvidenceRows(data).map(
+                (person) =>
+                  new TableRow({
+                    children: [
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: person.name, font, size: 22 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            children: [new TextRun({ text: `TIN: ${person.tin}`, font, size: 22 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            children: [new TextRun({ text: '', font, size: 22 })],
+                          }),
+                        ],
+                      }),
+                    ],
+                  })
+              ),
+            ],
+          }),
+
+          new Paragraph({
+            spacing: { before: 180 },
+            children: [],
+          }),
+
+          createBodyPara(
+            'known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me that the same is their free and voluntary act and deed as well as of the corporation they represent.',
+            font,
+            false,
             240
           ),
 
@@ -662,6 +749,29 @@ export function generateDirectorsCertDoc(data: DissolutionFormData): Document {
       },
     ],
   });
+}
+
+function getDirectorsCompetentEvidenceRows(data: DissolutionFormData): { name: string; tin: string }[] {
+  const rows: { name: string; tin: string }[] = [];
+  const seen = new Set<string>();
+
+  for (const s of data.stockholders) {
+    const norm = (s.name || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    if (norm && !seen.has(norm)) {
+      seen.add(norm);
+      rows.push({ name: s.name, tin: s.tin });
+    }
+  }
+
+  if (data.corporateSecretaryName) {
+    const normSec = data.corporateSecretaryName.trim().toLowerCase().replace(/\s+/g, ' ');
+    if (normSec && !seen.has(normSec)) {
+      seen.add(normSec);
+      rows.push({ name: data.corporateSecretaryName, tin: data.corporateSecretaryTin });
+    }
+  }
+
+  return rows;
 }
 
 // -------------------------------------------------------------

@@ -369,8 +369,54 @@ function buildDirectorsCertPdf(data: DissolutionFormData): jsPDF {
   doc.text('___________________________ ) S.S.', margin, y);
   y += 28;
 
-  const ack1 = `BEFORE ME, a Notary Public for and in the above jurisdiction, this ___ day of _________, ${data.executionMonthYear || '2026'}, personally appeared the above-named persons, known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me that the same is their free and voluntary act and deed as well as of the corporation they represent.`;
-  y = printJustifiedPara(doc, ack1, margin, y, contentWidth, 30);
+  const ackIntro = `BEFORE ME, a Notary Public for and in the above jurisdiction, this ___ day of _________, ${data.executionMonthYear || '2026'}, personally appeared the following persons with their respective Competent Evidence of Identity:`;
+  y = printJustifiedPara(doc, ackIntro, margin, y, contentWidth, 30);
+  y += 16;
+
+  // Competent Evidence Table (TIN)
+  const col1 = margin;
+  const col2 = margin + 210;
+  const col3 = margin + 365;
+  doc.setFont(font, 'bold');
+  doc.setFontSize(10);
+  doc.text('Name', col1, y);
+  doc.text('Competent Evidence (TIN)', col2, y);
+  doc.text('Date / Place Issued', col3, y);
+  y += 6;
+  doc.line(margin, y, margin + contentWidth, y);
+  y += 16;
+
+  doc.setFont(font, 'normal');
+  const seen = new Set<string>();
+  const evidenceRows: { name: string; tin: string }[] = [];
+  for (const s of data.stockholders) {
+    const norm = (s.name || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    if (norm && !seen.has(norm)) {
+      seen.add(norm);
+      evidenceRows.push({ name: s.name, tin: s.tin });
+    }
+  }
+  if (data.corporateSecretaryName) {
+    const normSec = data.corporateSecretaryName.trim().toLowerCase().replace(/\s+/g, ' ');
+    if (normSec && !seen.has(normSec)) {
+      seen.add(normSec);
+      evidenceRows.push({ name: data.corporateSecretaryName, tin: data.corporateSecretaryTin });
+    }
+  }
+
+  evidenceRows.forEach((person) => {
+    doc.text(person.name, col1, y);
+    doc.text(`TIN: ${person.tin || ''}`, col2, y);
+    doc.text('', col3, y);
+    y += 18;
+  });
+
+  doc.line(margin, y - 4, margin + contentWidth, y - 4);
+  y += 20;
+
+  doc.setFontSize(11);
+  const ackBody = `known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me that the same is their free and voluntary act and deed as well as of the corporation they represent.`;
+  y = printJustifiedPara(doc, ackBody, margin, y, contentWidth);
   y += 18;
 
   const ack2 = `IN WITNESS WHEREOF, I have hereunto set my hand and affixed my notarial seal on the date and at the place above written.`;

@@ -34,7 +34,7 @@ export const StandaloneHtmlModal: React.FC<StandaloneHtmlModalProps> = ({ isOpen
   useEffect(() => {
     if (isOpen && !standaloneHtml && !loading) {
       setLoading(true);
-      fetch('/sec-dissolution-generator-standalone.html')
+      fetch(`${import.meta.env.BASE_URL}sec-dissolution-generator-standalone.html`)
         .then((res) => {
           if (!res.ok) throw new Error('Failed to load standalone HTML');
           return res.text();
