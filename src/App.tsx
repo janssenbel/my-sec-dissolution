@@ -400,7 +400,7 @@ export default function App() {
       {/* ========================================================= */}
       {/* DOCUMENT TABS BAR */}
       {/* ========================================================= */}
-      <div className="bg-slate-50 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 px-2.5 sm:px-6 py-1.5 sm:py-2 overflow-x-auto no-scrollbar flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-2.5 sm:px-6 py-1.5 sm:py-2 overflow-x-auto no-scrollbar flex items-center gap-1.5 sm:gap-2 shrink-0">
         <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider pl-1 mr-1 hidden md:inline">
           Documents:
         </span>
@@ -413,13 +413,13 @@ export default function App() {
               className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-lg whitespace-nowrap transition-all cursor-pointer ${
                 isActive
                   ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700/60 border border-slate-200 dark:border-slate-700'
+                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
               }`}
             >
               <span
                 className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${
                   isActive
-                    ? 'bg-white/20 text-white'
+                    ? 'bg-blue-800 text-white'
                     : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
                 }`}
               >
@@ -483,14 +483,14 @@ export default function App() {
       {/* ========================================================= */}
       <nav
         aria-label="Mobile Navigation"
-        className="lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-2 pt-1.5 pb-safe shrink-0 z-30 grid grid-cols-5 gap-1"
+        className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-2 pt-1.5 pb-safe shrink-0 z-30 grid grid-cols-5 gap-1"
       >
         <button
           type="button"
           onClick={() => setMobilePane('form')}
           className={`flex flex-col items-center justify-center min-h-[48px] rounded-xl py-1 text-[11px] font-semibold transition-colors cursor-pointer ${
             mobilePane === 'form'
-              ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/40'
+              ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950'
               : 'text-slate-600 dark:text-slate-400'
           }`}
         >
@@ -503,7 +503,7 @@ export default function App() {
           onClick={() => setMobilePane('preview')}
           className={`flex flex-col items-center justify-center min-h-[48px] rounded-xl py-1 text-[11px] font-semibold transition-colors cursor-pointer ${
             mobilePane === 'preview'
-              ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/40'
+              ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950'
               : 'text-slate-600 dark:text-slate-400'
           }`}
         >

@@ -38,7 +38,7 @@ export const PWAInstallButton: React.FC = () => {
         </button>
 
         {showIOSGuide && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/80 p-4">
             <div className="w-full max-w-sm rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-4 duration-150">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
