@@ -69,20 +69,20 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   return (
     <div className="flex flex-col h-full bg-slate-100 dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800">
       {/* Top Preview Action Bar */}
-      <div className="sticky top-0 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-5 py-3 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 shadow-xs">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 flex items-center justify-center font-bold text-sm">
+      <div className="sticky top-0 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-3.5 sm:px-5 py-2.5 sm:py-3 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2.5 shadow-xs">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 flex items-center justify-center font-bold text-sm shrink-0">
             <FileText className="w-4 h-4" />
           </div>
-          <div>
-            <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-sm leading-tight">
+          <div className="min-w-0">
+            <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-xs sm:text-sm leading-tight truncate">
               {docMeta.title}
             </h3>
-            <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              <span>Preview</span>
-              <span>&bull;</span>
+            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 flex-wrap">
+              <span className="hidden sm:inline">Preview</span>
+              <span className="hidden sm:inline">&bull;</span>
               {onUpdatePageSize ? (
-                <div className="inline-flex items-center rounded border border-slate-300 dark:border-slate-700 text-[11px] overflow-hidden">
+                <div className="inline-flex items-center rounded border border-slate-300 dark:border-slate-700 text-[10px] sm:text-[11px] overflow-hidden">
                   {(['LETTER', 'LEGAL', 'A4'] as const).map((sz) => (
                     <button
                       key={sz}
@@ -91,7 +91,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                       className={`px-1.5 py-0.5 font-medium transition-colors cursor-pointer ${
                         formData.pageSize === sz
                           ? 'bg-blue-600 text-white font-bold'
-                          : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
+                          : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
                       }`}
                     >
                       {sz}
@@ -102,30 +102,30 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                 <span className="font-semibold text-slate-700 dark:text-slate-300">{pageSizeLabel}</span>
               )}
               <span>&bull;</span>
-              <span>{formData.fontFamily}</span>
+              <span className="truncate">{formData.fontFamily}</span>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
           <button
             onClick={handleCopyText}
             type="button"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
             title="Copy plain text"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-            {copied ? 'Copied' : 'Copy'}
+            <span className="hidden sm:inline">{copied ? 'Copied' : 'Copy'}</span>
           </button>
 
           <button
             onClick={handlePrint}
             type="button"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
             title="Print or Save as PDF via Browser"
           >
             <Printer className="w-3.5 h-3.5" />
-            Print
+            <span>Print</span>
           </button>
 
           {/* DOWNLOAD PDF */}
@@ -133,11 +133,11 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             onClick={handleDownloadPdf}
             disabled={downloadingPdf}
             type="button"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-700 dark:text-rose-200 bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/60 rounded-md shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-rose-700 dark:text-rose-200 bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/60 rounded-lg shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
             title="Download this document in PDF format"
           >
             <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
-            {downloadingPdf ? 'Exporting PDF...' : 'Download PDF'}
+            <span>{downloadingPdf ? 'PDF...' : 'PDF'}</span>
           </button>
 
           {/* DOWNLOAD WORD */}
@@ -145,26 +145,26 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             onClick={handleDownload}
             disabled={downloading}
             type="button"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
             title="Download this document in Microsoft Word (.docx) format"
           >
             <FileDown className="w-3.5 h-3.5" />
-            {downloading ? 'Generating...' : 'Download Word'}
+            <span>{downloading ? 'Word...' : 'Word'}</span>
           </button>
         </div>
       </div>
 
       {/* Notice Banner about Signatory Separation */}
-      <div className="bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-900/50 px-4 py-2 flex items-center gap-2 text-xs text-amber-900 dark:text-amber-200">
-        <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
-        <span>
-          <strong>Signatory Page Separated:</strong> In compliance with requirements, the signatory block and notarial jurat are strictly placed on subsequent separate page(s) via Word Page Breaks.
+      <div className="bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-2 text-[11px] sm:text-xs text-amber-900 dark:text-amber-200">
+        <Sparkles className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+        <span className="truncate sm:whitespace-normal">
+          <strong>Signatory Page Separated:</strong> Signatory block &amp; notarial jurat are placed on dedicated separate page(s).
         </span>
       </div>
 
       {/* Scrollable Document Sheet Preview Container */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 flex flex-col items-center gap-8">
-        <div id="legal-doc-preview" className="w-full max-w-3xl flex flex-col gap-8 print:p-0">
+      <div className="flex-1 overflow-y-auto p-2.5 sm:p-6 lg:p-8 flex flex-col items-center gap-6 sm:gap-8">
+        <div id="legal-doc-preview" className="w-full max-w-3xl flex flex-col gap-6 sm:gap-8 print:p-0">
           {renderDocumentContent(currentDoc, formData)}
         </div>
       </div>
@@ -220,14 +220,14 @@ function PageSheet({
   return (
     <div
       style={fontStyle}
-      className={`page-sheet relative bg-white text-slate-900 shadow-md rounded-sm border border-slate-200 p-8 sm:p-14 min-h-[960px] text-[15px] leading-relaxed select-text print:shadow-none print:border-none print:p-8 ${
+      className={`page-sheet relative bg-white text-slate-900 shadow-md rounded-sm border border-slate-200 dark:border-slate-700 p-5 sm:p-14 pt-10 sm:pt-14 min-h-[640px] sm:min-h-[960px] text-[13px] sm:text-[15px] leading-relaxed select-text print:shadow-none print:border-none print:p-8 ${
         isSignatoryPage ? 'ring-2 ring-blue-500/30' : ''
       }`}
     >
       {/* Page Header Badge for Clarity */}
-      <div className="absolute top-3 right-4 flex items-center gap-2 text-[11px] font-sans tracking-wide uppercase text-slate-400 print:hidden select-none">
+      <div className="absolute top-2.5 right-3 sm:top-3 sm:right-4 flex items-center gap-2 text-[10px] sm:text-[11px] font-sans tracking-wide uppercase text-slate-400 print:hidden select-none">
         {isSignatoryPage && (
-          <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 font-semibold text-[10px]">
+          <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 font-semibold text-[9px] sm:text-[10px]">
             Signatory Page (Page Break)
           </span>
         )}

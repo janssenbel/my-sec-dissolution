@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af" />
+      <stop offset="50%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <!-- Full-bleed background with ZERO border -->
+  <rect width="512" height="512" fill="url(#bgGrad)" />
+  
+  <!-- Document sheet silhouette -->
+  <path d="M148 96 h152 l64 64 v236 c0 11 -9 20 -20 20 H148 c-11 0 -20 -9 -20 -20 V116 c0 -11 9 -20 20 -20 z" fill="#ffffff" />
+  <path d="M300 96 v48 c0 9 7 16 16 16 h48 z" fill="#dbeafe" />
+  
+  <!-- Legal text lines inside document -->
+  <rect x="168" y="184" width="110" height="14" rx="7" fill="#1e40af" />
+  <rect x="168" y="218" width="156" height="10" rx="5" fill="#94a3b8" />
+  <rect x="168" y="242" width="156" height="10" rx="5" fill="#94a3b8" />
+  <rect x="168" y="266" width="128" height="10" rx="5" fill="#94a3b8" />
+  <rect x="168" y="290" width="144" height="10" rx="5" fill="#94a3b8" />
+  
+  <!-- Gold seal / SEC emblem badge -->
+  <circle cx="348" cy="364" r="60" fill="url(#goldGrad)" />
+  <path d="M324 364 l16 16 l34 -34" fill="none" stroke="#1e293b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
