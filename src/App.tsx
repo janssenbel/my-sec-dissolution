@@ -69,13 +69,17 @@ export default function App() {
   const [profilesModalOpen, setProfilesModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Sync Dark Mode class on <html>
+  // Sync Dark Mode class on <html> and update iOS status bar theme-color to solid color
   useEffect(() => {
     const root = document.documentElement;
     if (darkMode) {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
+    }
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute('content', darkMode ? '#0f172a' : '#ffffff');
     }
     try {
       localStorage.setItem(THEME_STORAGE_KEY, String(darkMode));
