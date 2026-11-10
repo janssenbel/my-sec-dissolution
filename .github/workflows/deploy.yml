@@ -38,6 +38,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+      
+      - name: Verify production build files
+        run: |
+          echo "Checking dist directory..."
+          ls -lah dist
+          echo "Checking PWA files..."
+          test -f dist/index.html
+          test -f dist/icon.svg
+          test -f dist/manifest.webmanifest
+          test -f dist/pwa-192x192.png
+          test -f dist/pwa-512x512.png
+          echo "All required files are present."
 
   deploy:
     environment:
