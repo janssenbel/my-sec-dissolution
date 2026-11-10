@@ -19,7 +19,6 @@ import {
   Maximize2,
   FileText,
   ShieldCheck,
-  Building,
   CheckCircle2,
   Code2,
   Bookmark,
@@ -263,10 +262,19 @@ export default function App() {
       {/* ========================================================= */}
       <header className="min-h-14 sm:h-16 px-3 sm:px-6 py-2 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 sm:gap-4 shrink-0 z-30 pt-safe">
         <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-          {/* Borderless App Icon */}
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 border-0 ring-0 outline-none">
-            <Building className="w-5 h-5" />
-          </div>
+          {/* Red Stop Symbol Vector Icon (Borderless, matches Home Screen icon) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            className="w-9 h-9 sm:w-10 sm:h-10 shrink-0"
+            aria-label="Red Stop Symbol"
+          >
+            <polygon
+              points="154,16 358,16 496,154 496,358 358,496 154,496 16,358 16,154"
+              fill="#dc2626"
+            />
+            <rect x="176" y="176" width="160" height="160" rx="18" fill="#ffffff" />
+          </svg>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <h1 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight truncate">

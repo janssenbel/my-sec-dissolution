@@ -42,12 +42,18 @@ export const PWAInstallButton: React.FC = () => {
             <div className="w-full max-w-sm rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-4 duration-150">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={`${import.meta.env.BASE_URL}apple-touch-icon.png`}
-                    alt="SEC Docs Icon"
-                    referrerPolicy="no-referrer"
-                    className="w-11 h-11 rounded-xl shadow-xs"
-                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    className="w-11 h-11 shrink-0"
+                    aria-label="Red Stop Symbol"
+                  >
+                    <polygon
+                      points="154,16 358,16 496,154 496,358 358,496 154,496 16,358 16,154"
+                      fill="#dc2626"
+                    />
+                    <rect x="176" y="176" width="160" height="160" rx="18" fill="#ffffff" />
+                  </svg>
                   <div>
                     <h3 className="text-base font-bold text-slate-900 dark:text-white">
                       Add to Home Screen
