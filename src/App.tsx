@@ -73,8 +73,14 @@ export default function App() {
     const root = document.documentElement;
     if (darkMode) {
       root.classList.add('dark');
+      root.style.backgroundColor = '#0f172a';
+      root.style.colorScheme = 'dark';
+      document.body.style.backgroundColor = '#0f172a';
     } else {
       root.classList.remove('dark');
+      root.style.backgroundColor = '#ffffff';
+      root.style.colorScheme = 'light';
+      document.body.style.backgroundColor = '#ffffff';
     }
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) {
@@ -267,10 +273,7 @@ export default function App() {
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col w-full h-full overflow-hidden bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors">
-      {/* Solid Status Bar & iOS Standalone Blur-Clearance Spacer */}
-      <div className="w-full bg-white dark:bg-slate-900 shrink-0 pt-safe" aria-hidden="true" />
-
+    <div className="flex flex-col w-full h-full overflow-hidden bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors">
       {/* ========================================================= */}
       {/* TOP BAR */}
       {/* ========================================================= */}

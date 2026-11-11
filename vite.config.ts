@@ -29,8 +29,8 @@ export default defineConfig({
         description:
           'Automated generator for Philippine SEC corporate dissolution documents in Microsoft Word (.docx) and PDF format with dedicated signatory pages.',
 
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        theme_color: '#0f172a',
+        background_color: '#0f172a',
 
         display: 'standalone',
         start_url: '/my-sec-dissolution/',
