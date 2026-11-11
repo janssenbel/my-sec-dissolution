@@ -87,6 +87,17 @@ export default function App() {
     }
   }, [darkMode]);
 
+  // Prevent iOS WKScrollView root scrolling which triggers iOS 26 status-bar blur overlay
+  useEffect(() => {
+    const resetRootScroll = () => {
+      if (window.scrollY !== 0 || window.scrollX !== 0) {
+        window.scrollTo(0, 0);
+      }
+    };
+    window.addEventListener('scroll', resetRootScroll, { passive: true });
+    return () => window.removeEventListener('scroll', resetRootScroll);
+  }, []);
+
   // Auto-save active form state to LocalStorage
   useEffect(() => {
     try {
@@ -256,11 +267,18 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-dvh w-screen overflow-hidden bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="fixed inset-0 flex flex-col w-full h-full overflow-hidden bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors">
+      {/* Solid Status Bar & iOS Standalone Blur-Clearance Spacer */}
+      <div className="w-full bg-white dark:bg-slate-900 shrink-0 pt-safe" aria-hidden="true" />
+
       {/* ========================================================= */}
-      {/* TOP HEADER */}
+      {/* TOP BAR */}
       {/* ========================================================= */}
-      <header className="min-h-14 sm:h-16 px-3 sm:px-6 py-2 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 sm:gap-4 shrink-0 z-30 pt-safe">
+      <div
+        role="region"
+        aria-label="Application Top Bar"
+        className="min-h-14 sm:h-16 px-3 sm:px-6 py-2 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 sm:gap-4 shrink-0"
+      >
         <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
           {/* Red Stop Symbol Vector Icon (Borderless, matches Home Screen icon) */}
           <svg
@@ -407,7 +425,7 @@ export default function App() {
             </span>
           </button>
         </div>
-      </header>
+      </div>
 
       {/* ========================================================= */}
       {/* DOCUMENT TABS BAR */}

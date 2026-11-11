@@ -2,13 +2,22 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 html,
-body {
+body,
+#root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
   background-color: #ffffff;
-  overscroll-behavior-y: none;
 }
 
 html.dark,
-html.dark body {
+html.dark body,
+html.dark #root {
   background-color: #0f172a;
 }
 
@@ -24,7 +33,14 @@ html.dark body {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .pt-safe {
-    padding-top: 0px;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* In iOS Home Screen standalone mode, clear the 43px system top blur zone with solid header background */
+@media all and (display-mode: standalone) {
+  .pt-safe {
+    padding-top: max(env(safe-area-inset-top, 0px), 44px) !important;
   }
 }
 

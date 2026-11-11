@@ -478,7 +478,7 @@ export const FormEditor: React.FC<FormEditorProps> = ({
       </div>
 
       {/* Tab Contents */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-5 space-y-5">
         {/* ========================================================= */}
         {/* TAB 1: COMPANY */}
         {/* ========================================================= */}
@@ -597,13 +597,13 @@ export const FormEditor: React.FC<FormEditorProps> = ({
             )}
 
             {/* Corporate Secretary */}
-            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3">
-              <div className="flex items-center justify-between">
+            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3 overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-bold text-xs uppercase tracking-wider text-blue-700 dark:text-blue-400">
                   Corporate Secretary
                 </span>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-slate-500">Forum Shopping & Sec Cert</span>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-[10px] text-slate-500 hidden sm:inline">Forum Shopping &amp; Sec Cert</span>
                   {knownPersons.length > 0 && (
                     <select
                       onChange={(e) => {
@@ -611,10 +611,10 @@ export const FormEditor: React.FC<FormEditorProps> = ({
                         if (match) handleSelectPersonForRole('corporateSecretary', match);
                         e.target.value = '';
                       }}
-                      className="text-[10px] py-0.5 px-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
+                      className="max-w-[160px] sm:max-w-[200px] truncate text-xs py-1 px-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
                       defaultValue=""
                     >
-                      <option value="" disabled>⚡ Autofill from person...</option>
+                      <option value="" disabled>⚡ Autofill person...</option>
                       {knownPersons.map((p) => (
                         <option key={p.normalizedName} value={p.normalizedName}>
                           {p.name} ({p.tin || 'No TIN'})
@@ -682,13 +682,13 @@ export const FormEditor: React.FC<FormEditorProps> = ({
             </div>
 
             {/* President */}
-            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3">
-              <div className="flex items-center justify-between">
+            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3 overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-bold text-xs uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   President
                 </span>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-slate-500">Signatory for Affidavit</span>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-[10px] text-slate-500 hidden sm:inline">Signatory for Affidavit</span>
                   {knownPersons.length > 0 && (
                     <select
                       onChange={(e) => {
@@ -696,10 +696,10 @@ export const FormEditor: React.FC<FormEditorProps> = ({
                         if (match) handleSelectPersonForRole('president', match);
                         e.target.value = '';
                       }}
-                      className="text-[10px] py-0.5 px-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
+                      className="max-w-[160px] sm:max-w-[200px] truncate text-xs py-1 px-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
                       defaultValue=""
                     >
-                      <option value="" disabled>⚡ Autofill from person...</option>
+                      <option value="" disabled>⚡ Autofill person...</option>
                       {knownPersons.map((p) => (
                         <option key={p.normalizedName} value={p.normalizedName}>
                           {p.name} ({p.tin || 'No TIN'})
@@ -767,13 +767,13 @@ export const FormEditor: React.FC<FormEditorProps> = ({
             </div>
 
             {/* Treasurer */}
-            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3">
-              <div className="flex items-center justify-between">
+            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3 overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-bold text-xs uppercase tracking-wider text-purple-700 dark:text-purple-400">
                   Treasurer
                 </span>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-slate-500">Signatory for Affidavit</span>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-[10px] text-slate-500 hidden sm:inline">Signatory for Affidavit</span>
                   {knownPersons.length > 0 && (
                     <select
                       onChange={(e) => {
@@ -781,10 +781,10 @@ export const FormEditor: React.FC<FormEditorProps> = ({
                         if (match) handleSelectPersonForRole('treasurer', match);
                         e.target.value = '';
                       }}
-                      className="text-[10px] py-0.5 px-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
+                      className="max-w-[160px] sm:max-w-[200px] truncate text-xs py-1 px-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
                       defaultValue=""
                     >
-                      <option value="" disabled>⚡ Autofill from person...</option>
+                      <option value="" disabled>⚡ Autofill person...</option>
                       {knownPersons.map((p) => (
                         <option key={p.normalizedName} value={p.normalizedName}>
                           {p.name} ({p.tin || 'No TIN'})
@@ -852,19 +852,19 @@ export const FormEditor: React.FC<FormEditorProps> = ({
             </div>
 
             {/* Authorized Representative to SEC */}
-            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3">
-              <div className="flex items-center justify-between">
+            <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-4 bg-slate-50/50 dark:bg-slate-800/30 space-y-3 overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-bold text-xs uppercase tracking-wider text-amber-700 dark:text-amber-400">
                   Authorized Representative for SEC Filing
                 </span>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2 min-w-0">
                   <button
                     type="button"
                     onClick={handleCopySecToAuthRep}
                     className="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium cursor-pointer"
                   >
                     <Copy className="w-3 h-3" />
-                    Same as Corporate Secretary
+                    Same as Corp. Sec.
                   </button>
                   {knownPersons.length > 0 && (
                     <select
@@ -873,7 +873,7 @@ export const FormEditor: React.FC<FormEditorProps> = ({
                         if (match) handleSelectPersonForRole('authorizedRep', match);
                         e.target.value = '';
                       }}
-                      className="text-[10px] py-0.5 px-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
+                      className="max-w-[150px] sm:max-w-[190px] truncate text-xs py-1 px-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
                       defaultValue=""
                     >
                       <option value="" disabled>⚡ Autofill person...</option>
@@ -951,13 +951,13 @@ export const FormEditor: React.FC<FormEditorProps> = ({
               {formData.stockholders.map((person, index) => (
                 <div
                   key={person.id}
-                  className="border border-slate-200 dark:border-slate-800 rounded-lg p-3 bg-slate-50/50 dark:bg-slate-800/40 space-y-3"
+                  className="border border-slate-200 dark:border-slate-800 rounded-lg p-3 bg-slate-50/50 dark:bg-slate-800/40 space-y-3 overflow-hidden"
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200 dark:border-slate-700">
                     <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                       #{index + 1} {person.name || 'Unnamed'}
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
                       {knownPersons.length > 0 && (
                         <select
                           onChange={(e) => {
@@ -965,7 +965,7 @@ export const FormEditor: React.FC<FormEditorProps> = ({
                             if (match) handleSelectPersonForStockholder(index, match);
                             e.target.value = '';
                           }}
-                          className="text-[10px] py-0.5 px-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
+                          className="max-w-[150px] sm:max-w-[190px] truncate text-xs py-1 px-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded text-slate-700 dark:text-slate-300 cursor-pointer"
                           defaultValue=""
                         >
                           <option value="" disabled>⚡ Autofill from person...</option>
